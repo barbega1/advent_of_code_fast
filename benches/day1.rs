@@ -22,4 +22,3 @@ pub fn day3(c: &mut Criterion) {
 
 criterion_group!(benches, day3);
 criterion_main!(benches);
-
