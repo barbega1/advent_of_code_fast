@@ -1,10 +1,12 @@
 extern crate regex;
 use std::fmt::Display;
+use std::arch::asm;
+
 
 pub fn part1(s: &str) -> impl Display {
     let mut part1: u32 = 0;
     let bytes = s.as_bytes();
-    for i in 0..(bytes.len() - 8) / 2 {
+    for i in 0..20 { //(bytes.len() - 8) / 2 {
         let two_letters: u16 = bytes[i * 2] as u16 + 256u16 * bytes[i * 2 + 1] as  u16;
         let mut index = 0;
         let mut found_index = 0;
