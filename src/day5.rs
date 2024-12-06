@@ -78,6 +78,7 @@ pub fn part2(s: &str) -> impl Display {
     let mut part2: u32 = 0;
     let mut cache: [[u8; 100]; 100] = [[0; 100]; 100];
     let mut line_nums: [u8; 23] = [0; 23];
+    let mut line_nums_sort: [u8; 23] = [0; 23];
 
     let bytes = s.as_bytes();
 
@@ -124,20 +125,32 @@ pub fn part2(s: &str) -> impl Display {
                 line_ok &= cache[prev_num as usize][temp_num as usize] == 1;
                 if !line_ok {
                     line_nums[line_nums_i] = temp_num;
-                    line_nums_i += 1;
-                    for j in 0..line_nums_i {
-                        let mut smaller_nums = 0;
-                        for k in 0..line_nums_i {
-                            if j == k {
-                                continue;
+                    let target_index = (line_nums_i) /2;
+                    let mut left = 0;
+                    let mut right = line_nums_i;
+                    while left < right {
+                        let pivot = (left + right)/2;
+                        let pivot_value = line_nums[pivot];
+                        let mut storage = left;
+                        line_nums[pivot] = line_nums[right];
+                        line_nums[right] = pivot_value;
+                        for j in left..right{
+                            if cache[line_nums[j] as usize][pivot_value as usize] == 0 {
+                                let temp = line_nums[storage];
+                                line_nums[storage] = line_nums[j];
+                                line_nums[j]=temp;
+                                storage += 1;
                             }
-                            smaller_nums += cache[line_nums[j] as usize][line_nums[k] as usize];
                         }
-                        if smaller_nums == (line_nums_i as u8 - 1) / 2 {
-                            part2 += line_nums[j] as u32;
-                            break;
+                        line_nums[right]=line_nums[storage];
+                        line_nums[storage]=pivot_value;
+                        if storage < target_index {
+                            left = storage+1;
+                        } else {
+                            right = storage;
                         }
                     }
+                    part2 += line_nums[target_index] as u32;
                 }
                 line_nums_i = 0;
                 line_ok = true;
