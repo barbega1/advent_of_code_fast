@@ -1,4 +1,5 @@
 #![feature(unchecked_shifts)]
+#![feature(core_intrinsics)]
 extern crate advent_of_code_fast;
 extern crate aoc_runner;
 extern crate aoc_runner_derive;

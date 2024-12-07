@@ -211,7 +211,10 @@ pub fn part2(s: &str) -> impl Display {
                             } else if *map.get_unchecked(guard_y - 1).get_unchecked(guard_x) != 1 {
                                 guard_y -= 1;
                             } else {
-                                if(y_obstacle == guard_y -1 && x_obstacle == guard_x && !hit_obstacle) {
+                                if (y_obstacle == guard_y - 1
+                                    && x_obstacle == guard_x
+                                    && !hit_obstacle)
+                                {
                                     steps_limit = steps + 5000;
                                     hit_obstacle = true;
                                 }
@@ -224,7 +227,10 @@ pub fn part2(s: &str) -> impl Display {
                             } else if *map.get_unchecked(guard_y).get_unchecked(guard_x + 1) != 1 {
                                 guard_x += 1;
                             } else {
-                                if(y_obstacle == guard_y && x_obstacle == guard_x + 1 && !hit_obstacle) {
+                                if (y_obstacle == guard_y
+                                    && x_obstacle == guard_x + 1
+                                    && !hit_obstacle)
+                                {
                                     steps_limit = steps + 5000;
                                     hit_obstacle = true;
                                 }
@@ -237,7 +243,10 @@ pub fn part2(s: &str) -> impl Display {
                             } else if *map.get_unchecked(guard_y + 1).get_unchecked(guard_x) != 1 {
                                 guard_y += 1;
                             } else {
-                                if(y_obstacle == guard_y + 1 && x_obstacle == guard_x && !hit_obstacle) {
+                                if (y_obstacle == guard_y + 1
+                                    && x_obstacle == guard_x
+                                    && !hit_obstacle)
+                                {
                                     hit_obstacle = true;
                                     steps_limit = steps + 5000;
                                 }
@@ -250,7 +259,10 @@ pub fn part2(s: &str) -> impl Display {
                             } else if *map.get_unchecked(guard_y).get_unchecked(guard_x - 1) != 1 {
                                 guard_x -= 1;
                             } else {
-                                if(y_obstacle == guard_y && x_obstacle == guard_x - 1 && !hit_obstacle) {
+                                if (y_obstacle == guard_y
+                                    && x_obstacle == guard_x - 1
+                                    && !hit_obstacle)
+                                {
                                     hit_obstacle = true;
                                     steps_limit = steps + 5000;
                                 }
