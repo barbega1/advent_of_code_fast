@@ -3,7 +3,7 @@ use std::fmt::Display;
 pub fn part1(s: &str) -> impl Display {
     unsafe {
         let mut part1: u32 = 0;
-        let mut cache: [[u8; 100]; 100] = [[0; 100]; 100];
+        let mut cache: [u128; 100] = [0; 100];
 
         let bytes = s.as_bytes();
 
@@ -21,7 +21,7 @@ pub fn part1(s: &str) -> impl Display {
                     if a == 0 {
                         break;
                     } else {
-                        *cache.get_unchecked_mut(a).get_unchecked_mut(temp_num) = 1;
+                        *cache.get_unchecked_mut(a) |= 1 << temp_num;
                     }
                     temp_num = 0;
                     a = 0;
@@ -44,7 +44,7 @@ pub fn part1(s: &str) -> impl Display {
             match c {
                 b',' => {
                     if prev_num != 0 {
-                        line_ok &= cache[prev_num as usize][temp_num as usize] == 1u8;
+                        line_ok &= (cache.get_unchecked(prev_num as usize) >> temp_num & 1) == 1;
                         //println!("{} {} {}", prev_num, temp_num, line_ok);
                     }
                     prev_num = temp_num;
@@ -53,8 +53,7 @@ pub fn part1(s: &str) -> impl Display {
                 b'\n' => {
                     line_ok &= *cache
                         .get_unchecked(prev_num as usize)
-                        .get_unchecked(temp_num as usize)
-                        == 1;
+                        >> temp_num & 1 == 1;
                     if line_ok {
                         //println!("Line is ok {}", line_len);
                         part1 = part1.unchecked_add(

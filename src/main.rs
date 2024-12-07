@@ -11,6 +11,8 @@ use aoc_runner_derive::aoc_main;
 
 pub mod day3;
 pub mod day5;
+pub mod day7;
+pub mod day6;
 
 fn main() {
     let s = read_to_string("./inputs/3.txt").unwrap();
