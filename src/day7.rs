@@ -5,7 +5,7 @@ pub fn part1(s: &str) -> impl Display {
     let bytes = s.as_bytes();
 
     let mut numbers = [0; 12];
-    let mut target : u64 = 0;
+    let mut target: u64 = 0;
     let mut number_index = 0;
     let mut temp_num: u64 = 0;
 
@@ -14,14 +14,14 @@ pub fn part1(s: &str) -> impl Display {
             b':' => {
                 target = temp_num;
                 temp_num = 0;
-            },
+            }
             b' ' => {
                 if temp_num != 0 {
                     numbers[number_index] = temp_num as u16;
                     number_index += 1;
                     temp_num = 0;
                 }
-            },
+            }
             b'\n' => {
                 numbers[number_index] = temp_num as u16;
                 number_index += 1;
@@ -41,10 +41,10 @@ pub fn part1(s: &str) -> impl Display {
                 }
                 println!("{}", target);
                 number_index = 0;
-            },
+            }
             _ => {
                 temp_num = temp_num * 10 + (c - b'0') as u64;
-            },
+            }
         }
     }
     part1

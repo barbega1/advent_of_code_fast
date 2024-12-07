@@ -51,9 +51,7 @@ pub fn part1(s: &str) -> impl Display {
                     temp_num = 0;
                 }
                 b'\n' => {
-                    line_ok &= *cache
-                        .get_unchecked(prev_num as usize)
-                        >> temp_num & 1 == 1;
+                    line_ok &= *cache.get_unchecked(prev_num as usize) >> temp_num & 1 == 1;
                     if line_ok {
                         //println!("Line is ok {}", line_len);
                         part1 = part1.unchecked_add(
