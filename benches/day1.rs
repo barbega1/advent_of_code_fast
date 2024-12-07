@@ -1,6 +1,6 @@
 use std::{fs::read_to_string, hint::black_box};
 
-use advent_of_code_fast::{day3, day5, day6};
+use advent_of_code_fast::{day3, day5, day6, day7};
 use criterion::{criterion_group, criterion_main, Criterion};
 
 pub fn day3(c: &mut Criterion) {
@@ -34,19 +34,34 @@ pub fn day3(c: &mut Criterion) {
     //     read_to_string("./outputs/3p2.txt").unwrap(),
     // );
 
-    let s6 = read_to_string("./inputs/6.txt").unwrap();
-    let s6 = s6.as_str();
+    // let s6 = read_to_string("./inputs/6.txt").unwrap();
+    // let s6 = s6.as_str();
 
-    c.bench_function("day6 part1", |b| b.iter(|| day6::part1(black_box(s6))));
-    c.bench_function("day6 part2", |b| b.iter(|| day6::part2(black_box(s6))));
+    // c.bench_function("day6 part1", |b| b.iter(|| day6::part1(black_box(s6))));
+    // c.bench_function("day6 part2", |b| b.iter(|| day6::part2(black_box(s6))));
+
+    // assert_eq!(
+    //     day6::part1(s6).to_string(),
+    //     read_to_string("./outputs/6p1.txt").unwrap(),
+    // );
+    // assert_eq!(
+    //     day6::part2(s6).to_string(),
+    //     read_to_string("./outputs/6p2.txt").unwrap(),
+    // );
+
+    let s7 = read_to_string("./inputs/7.txt").unwrap();
+    let s7 = s7.as_str();
+
+    c.bench_function("day7 part1", |b| b.iter(|| day7::part1(black_box(s7))));
+    c.bench_function("day7 part2", |b| b.iter(|| day7::part2(black_box(s7))));
 
     assert_eq!(
-        day6::part1(s6).to_string(),
-        read_to_string("./outputs/6p1.txt").unwrap(),
+        day7::part1(s7).to_string(),
+        read_to_string("./outputs/7p1.txt").unwrap(),
     );
     assert_eq!(
-        day6::part2(s6).to_string(),
-        read_to_string("./outputs/6p2.txt").unwrap(),
+        day7::part2(s7).to_string(),
+        read_to_string("./outputs/7p2.txt").unwrap(),
     );
 }
 

@@ -190,15 +190,17 @@ pub fn part2(s: &str) -> impl Display {
             if x_obstacle == guard_original_x && y_obstacle == guard_original_y {
                 continue;
             }
+            let mut steps_limit = original_steps + 2000;
             let mut steps = 0;
             guard_dir = Up;
             guard_x = guard_original_x;
             guard_y = guard_original_y;
+            let mut hit_obstacle = false;
             map[y_obstacle][x_obstacle] = 1;
             loop {
                 unsafe {
                     steps += 1;
-                    if steps > original_steps + 2000 {
+                    if steps > steps_limit {
                         part2 += 1;
                         break;
                     }
@@ -209,6 +211,10 @@ pub fn part2(s: &str) -> impl Display {
                             } else if *map.get_unchecked(guard_y - 1).get_unchecked(guard_x) != 1 {
                                 guard_y -= 1;
                             } else {
+                                if(y_obstacle == guard_y -1 && x_obstacle == guard_x && !hit_obstacle) {
+                                    steps_limit = steps + 5000;
+                                    hit_obstacle = true;
+                                }
                                 guard_dir = Right;
                             }
                         }
@@ -218,6 +224,10 @@ pub fn part2(s: &str) -> impl Display {
                             } else if *map.get_unchecked(guard_y).get_unchecked(guard_x + 1) != 1 {
                                 guard_x += 1;
                             } else {
+                                if(y_obstacle == guard_y && x_obstacle == guard_x + 1 && !hit_obstacle) {
+                                    steps_limit = steps + 5000;
+                                    hit_obstacle = true;
+                                }
                                 guard_dir = Down;
                             }
                         }
@@ -227,6 +237,10 @@ pub fn part2(s: &str) -> impl Display {
                             } else if *map.get_unchecked(guard_y + 1).get_unchecked(guard_x) != 1 {
                                 guard_y += 1;
                             } else {
+                                if(y_obstacle == guard_y + 1 && x_obstacle == guard_x && !hit_obstacle) {
+                                    hit_obstacle = true;
+                                    steps_limit = steps + 5000;
+                                }
                                 guard_dir = Left;
                             }
                         }
@@ -236,6 +250,10 @@ pub fn part2(s: &str) -> impl Display {
                             } else if *map.get_unchecked(guard_y).get_unchecked(guard_x - 1) != 1 {
                                 guard_x -= 1;
                             } else {
+                                if(y_obstacle == guard_y && x_obstacle == guard_x - 1 && !hit_obstacle) {
+                                    hit_obstacle = true;
+                                    steps_limit = steps + 5000;
+                                }
                                 guard_dir = Up;
                             }
                         }
