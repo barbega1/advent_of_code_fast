@@ -1,5 +1,6 @@
 #![feature(unchecked_shifts)]
 #![feature(core_intrinsics)]
+#![feature(naked_functions)]
 extern crate advent_of_code_fast;
 extern crate aoc_runner;
 extern crate aoc_runner_derive;
@@ -14,6 +15,7 @@ pub mod day3;
 pub mod day5;
 pub mod day6;
 pub mod day7;
+pub mod day8;
 
 fn main() {
     let s = read_to_string("./inputs/3.txt").unwrap();
